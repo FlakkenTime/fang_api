@@ -15,7 +15,9 @@ class Fang():
         :returns: String. The full defanged url.
         """
         # build the full string: url?parameters
-        result = url.lower() + "?" + parameters.lower()
+        result = url.lower()
+        if parameters != '':
+            result += "?" + parameters.lower()
 
         # defang it. Replace http with hxxp and . with [.]
         return result.replace("http://", "hxxp://").replace(".", "[.]")
@@ -29,5 +31,9 @@ class Fang():
         :returns: String. The full refanged url
         """
         # rebuild the full url then refang it.
-        result = url.lower() + "?" + parameters.lower()
+        result = url.lower()
+        if parameters != '':
+            result += "?" + parameters.lower()
+
+        # refang it. Replace hxxp with http and [.] with .
         return result.replace("hxxp://", "http://").replace("[.]", ".")
