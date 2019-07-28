@@ -24,4 +24,4 @@ HTTPS: `gunicorn --certfile=server.crt --keyfile=server.key src.fang_service:app
 2. simple refang: `curl "http://localhost:8000/refang/hxxp://bad[.]url[.]com"`
 
 ## Unit testing.
-upcoming
+Unit tests can be run from the root of the git directory with the following command: `py.test`
