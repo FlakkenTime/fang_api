@@ -20,8 +20,8 @@ Basic HTTP for testing: `gunicorn src.fang_service:app`
 HTTPS: `gunicorn --certfile=server.crt --keyfile=server.key src.fang_service:app`
 
 ## Direct testing
-1. simple defang: `curl "http://localhost:8000/defang/HTTP://bad.url.com"`
-2. simple refang: `curl "http://localhost:8000/refang/hxxp://bad[.]url[.]com"`
+1. defang: `curl "http://localhost:8000/defang/HTTP://bad.url.com"`
+2. refang: `curl "http://localhost:8000/refang/hxxp://bad[.]url[.]com"`
 
 ## Unit testing.
 Unit tests can be run from the root of the git directory with the following command: `py.test`
