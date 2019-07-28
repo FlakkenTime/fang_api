@@ -20,7 +20,7 @@ class Fang():
             result += "?" + parameters.lower()
 
         # defang it. Replace http with hxxp and . with [.]
-        return result.replace("http://", "hxxp://").replace(".", "[.]")
+        return result.replace("http", "hxxp").replace(".", "[.]")
 
     @staticmethod
     def refang(url, parameters):
@@ -36,4 +36,4 @@ class Fang():
             result += "?" + parameters.lower()
 
         # refang it. Replace hxxp with http and [.] with .
-        return result.replace("hxxp://", "http://").replace("[.]", ".")
+        return result.replace("hxxp", "http").replace("[.]", ".")
