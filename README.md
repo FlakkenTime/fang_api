@@ -1,7 +1,7 @@
 # fang_api
 
 ## Info
-This is a Proof of Concept for a URL clean / declean service. One endpoint accepts a unencoded URL and defangs it while another endpoint will refang it.
+This is a Proof of Concept for a URL clean / declean service. One set of endpoint accepts a unencoded URL and defangs it while another set of endpoint will refang it. Supports both GET and POST requests.
 
 ## Install
 pip3 install flask
@@ -21,9 +21,17 @@ HTTPS: `gunicorn --certfile=server.crt --keyfile=server.key src.fang_service:app
 
 ## Direct testing
 Note the port can be changed in `resources/config.py`
-1. defang: `curl "http://localhost:8000/defang/HTTP://bad.url.com"`
-2. refang: `curl "http://localhost:8000/refang/hxxp://bad[.]url[.]com"`
-3. You can also use the above URLs in your browser.
+1. defang GET request: `curl "http://localhost:8000/defang_get/HTTP://bad.url.com"`
+2. refang GET request: `curl "http://localhost:8000/refang_get/hxxp://bad[.]url[.]com"`
+3. defang POST request:
+```
+curl -X POST "http://localhost:8000/defang_post/" -H "Content-Type: application/json" -d '{"url": "HTTP://bad.url.com"}'
+```
+4. refang POST request:
+```
+curl -X POST "http://localhost:8000/refang_post/" -H "Content-Type: application/json" -d '{"url": "hxxp://bad[.]url[.]com"}'
+```
+5. You can also use the above URLs in your browser.
 
 ## Unit testing.
 Unit tests can be run from the root of the git directory with the following command: `py.test`
