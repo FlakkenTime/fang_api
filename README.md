@@ -47,3 +47,13 @@ curl -X POST "http://localhost:8000/refang_list/" -H "Content-Type: application/
 Unit tests can be run from the root of the git directory with the following command: `py.test`. This will execute tests on both the web application endpoints and the library.
 
 For a report of line coverage results use: `pytest --cov-report term-missing --cov=src/`
+```
+Name                  Stmts   Miss  Cover   Missing
+---------------------------------------------------
+src/__init__.py           0      0   100%
+src/fang.py              11      0   100%
+src/fang_service.py      57      1    98%   131
+---------------------------------------------------
+TOTAL                    68      1    99%
+```
+Missing the `app.run` line in main haha :)
