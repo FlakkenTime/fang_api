@@ -64,7 +64,7 @@ def defang_list():
               {'urls': [url1, url2, url3]}
     """
     req_data = request.get_json()
-    if req_data.get('urls', None) is None:
+    if req_data is None or req_data.get('urls', None) is None:
         result = {'error': "Proper format is JSON request {'url': ['url1', 'url2', 'etc']}"}
         return make_response(jsonify(result), 400)
 
@@ -91,7 +91,7 @@ def refang(url):
     result = {}
     if request.method == 'POST':
         req_data = request.get_json()
-        if req_data.get('url', None) is None:
+        if req_data is None or req_data.get('url', None) is None:
             result['error'] = "Proper format is JSON request {'url': 'http://example.com'}"
             return make_response(jsonify(result), 400)
 
@@ -114,7 +114,7 @@ def refang_list():
               {'urls': [url1, url2, url3]}
     """
     req_data = request.get_json()
-    if req_data.get('urls', None) is None:
+    if req_data is None or req_data.get('urls', None) is None:
         result = {'error': "Proper format is JSON request {'url': ['url1', 'url2', 'etc']}"}
         return make_response(jsonify(result), 400)
 
