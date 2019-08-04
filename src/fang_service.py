@@ -54,6 +54,29 @@ def defang(url):
     return make_response(jsonify(result), 200)
 
 
+@app.route('/defang_list/', methods=['POST'])
+def defang_list():
+    """
+    This handles POST requests with a JSON list of URL's to defang.
+    Expects a POST request in the format {'urls': [url1, url2, url3]}
+
+    :returns: (json, response_code). JSON is in format:
+              {'urls': [url1, url2, url3]}
+    """
+    req_data = request.get_json()
+    if req_data.get('urls', None) is None:
+        result = {'error': "Proper format is JSON request {'url': ['url1', 'url2', 'etc']}"}
+        return make_response(jsonify(result), 400)
+
+    defanged_urls = []
+    for bad_url in req_data['urls']:
+        url, parameters = handle_parameters(bad_url)
+        defanged_urls.append(Fang.defang(url, parameters))
+
+    result = {'urls': defanged_urls}
+    return make_response(jsonify(result), 200)
+
+
 @app.route('/refang_post/', defaults={'url': None}, methods=['POST'])
 @app.route("/refang_get/<path:url>", methods=['GET'])
 def refang(url):
@@ -78,6 +101,29 @@ def refang(url):
         # normal GET request
         result['url'] = Fang.refang(url, request.query_string.decode("utf-8"))
 
+    return make_response(jsonify(result), 200)
+
+
+@app.route('/refang_list/', methods=['POST'])
+def refang_list():
+    """
+    This handles POST requests with a JSON list of URL's to refang.
+    Expects a POST request in the format {'urls': [url1, url2, url3]}
+
+    :returns: (json, response_code). JSON is in format:
+              {'urls': [url1, url2, url3]}
+    """
+    req_data = request.get_json()
+    if req_data.get('urls', None) is None:
+        result = {'error': "Proper format is JSON request {'url': ['url1', 'url2', 'etc']}"}
+        return make_response(jsonify(result), 400)
+
+    refanged_urls = []
+    for bad_url in req_data['urls']:
+        url, parameters = handle_parameters(bad_url)
+        refanged_urls.append(Fang.refang(url, parameters))
+
+    result = {'urls': refanged_urls}
     return make_response(jsonify(result), 200)
 
 
