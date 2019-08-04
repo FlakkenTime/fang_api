@@ -10,6 +10,8 @@ pip3 install gunicorn
 
 pip3 install pytest
 
+pip3 install pytest-cov
+
 
 ## Config
 1. There is a basic gunicorn config in `resources/config.py` that can be used for further customization
@@ -42,4 +44,6 @@ curl -X POST "http://localhost:8000/refang_list/" -H "Content-Type: application/
 7. GET requests can also be easily tested in your browser.
 
 ## Unit testing.
-Unit tests can be run from the root of the git directory with the following command: `py.test`
+Unit tests can be run from the root of the git directory with the following command: `py.test`. This will execute tests on both the web application endpoints and the library.
+
+For a report of line coverage results use: `pytest --cov-report term-missing --cov=src/`
