@@ -16,10 +16,17 @@ pip3 install pytest-cov
 ## Config
 1. There is a basic gunicorn config in `resources/config.py` that can be used for further customization
 
-## Run it
-Basic HTTP for testing: `gunicorn src.fang_service:app`
+## Run it locally
+Basic HTTP for testing: `gunicorn -c resources/config.py src.fang_service:app`
 
-HTTPS: `gunicorn --certfile=server.crt --keyfile=server.key src.fang_service:app`
+HTTPS: `gunicorn --certfile=server.crt --keyfile=server.key -c resources/config.py src.fang_service:app`
+
+## Run with Docker
+1. docker build -t fang_api:latest .
+2. docker run --name fang_api -d -p 8000:8000 fang_api
+To find the the IP that is needed you can use:
+1. docker ps -a     # find the container id
+2. docker inspect the_id    # and find the listed address
 
 ## Direct testing
 Note the port can be changed in `resources/config.py`
